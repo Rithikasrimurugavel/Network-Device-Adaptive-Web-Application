@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation #{{ order.order_number }} | Taste &amp; Trend</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .success-card {
+            max-width: 750px;
+            margin: 3rem auto;
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+        }
+        .success-badge {
+            width: 70px;
+            height: 70px;
+            background: #dcfce7;
+            color: #16a34a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+        .order-meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+        }
+        .item-receipt-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo-brand">
+                <span class="taste"><i class="fas fa-utensils"></i> TASTE</span>
+                <span class="amp">&amp;</span>
+                <span class="trend">TREND <i class="fas fa-vest-patches"></i></span>
+            </a>
+            <div>
+                <a href="/" class="cta-btn cta-food" style="text-decoration:none; font-size:0.85rem;">
+                    <i class="fas fa-arrow-left"></i> Return to Shop
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="success-card">
+            <div class="success-badge">
+                <i class="fas fa-check"></i>
+            </div>
+            <h1 style="text-align: center; font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">Order Successfully Placed!</h1>
+            <p style="text-align: center; color: var(--text-muted);">Thank you, <strong>{{ order.customer_name }}</strong>. We have received your order and are preparing it for delivery.</p>
+
+            <div class="order-meta-grid">
+                <div>
+                    <div style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted);">Order Reference</div>
+                    <div style="font-size: 1.1rem; font-weight: 800; color: var(--text-dark);">{{ order.order_number }}</div>
+                </div>
+                <div>
+                    <div style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted);">Status</div>
+                    <div style="font-size: 1rem; font-weight: 800; color: #16a34a;"><i class="fas fa-spinner fa-spin"></i> {{ order.status }}</div>
+                </div>
+                <div>
+                    <div style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted);">Payment Method</div>
+                    <div style="font-size: 0.95rem; font-weight: 600;">{{ order.payment_method }}</div>
+                </div>
+                <div>
+                    <div style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted);">Shipping Address</div>
+                    <div style="font-size: 0.9rem; color: var(--text-dark);">{{ order.shipping_address }}</div>
+                </div>
+            </div>
+
+            <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 1rem;"><i class="fas fa-receipt"></i> Purchased Items</h3>
+            <div style="margin-bottom: 1.5rem;">
+                {% for item in items %}
+                <div class="item-receipt-row">
+                    <div>
+                        <div style="font-weight: 700;">{{ item.product_name }}</div>
+                        {% if item.selected_options %}
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">{{ item.selected_options }}</div>
+                        {% endif %}
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">$${{ "%.2f"|format(item.unit_price) }} × {{ item.quantity }}</div>
+                    </div>
+                    <div style="font-weight: 800;">
+                        ${{ "%.2f"|format(item.total_price) }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div style="display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 800; padding: 1rem 0; border-top: 2px solid var(--border-color);">
+                <span>Grand Total Paid:</span>
+                <span style="color: var(--primary-food);">${{ "%.2f"|format(order.total_amount) }}</span>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="/" class="btn-checkout" style="display: inline-block; width: auto; padding: 12px 30px; text-decoration: none;">
+                    Continue Shopping <i class="fas fa-shopping-bag"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

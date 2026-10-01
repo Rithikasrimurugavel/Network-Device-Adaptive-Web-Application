@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" data-perf-tier="high">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taste &amp; Trend | Gourmet Food &amp; Fashion Store with AI Assistant</title>
+    
+    <!-- Client Hints Meta Flags -->
+    <meta http-equiv="Accept-CH" content="Save-Data, ECT, Sec-CH-UA-Memory, Downlink, RTT">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <!-- Adaptive Performance Engine (Critical Head Scripts) -->
+    <script src="{{ url_for('static', filename='js/adaptive-engine.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/image-optimizer.js') }}"></script>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Brand Logo -->
+            <a href="/" class="logo-brand">
+                <span class="taste"><i class="fas fa-utensils"></i> TASTE</span>
+                <span class="amp">&amp;</span>
+                <span class="trend">TREND <i class="fas fa-vest-patches"></i></span>
+            </a>
+
+            <!-- Department Switcher Tabs -->
+            <div class="dept-tabs">
+                <button class="dept-btn active" data-dept="all">
+                    <i class="fas fa-border-all"></i> All Items
+                </button>
+                <button class="dept-btn" data-dept="food">
+                    <i class="fas fa-pizza-slice"></i> Food Hub
+                </button>
+                <button class="dept-btn" data-dept="dress">
+                    <i class="fas fa-tshirt"></i> Fashion Hub
+                </button>
+            </div>
+
+            <!-- Search Input -->
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search gourmet pizza, sushi, dresses, jackets...">
+            </div>
+
+            <!-- Header Action Buttons -->
+            <div class="nav-actions">
+                <button class="track-order-btn" id="trackOrderBtn" title="Track Your Order">
+                    <i class="fas fa-truck"></i> Track Order
+                </button>
+                <button class="cart-icon-btn" id="cartIconBtn">
+                    <i class="fas fa-shopping-bag"></i> Cart
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO BANNER -->
+    <header class="hero-banner">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>
+                    Delight Your <span class="highlight-food">Taste</span>.<br>
+                    Elevate Your <span class="highlight-dress">Style</span>.
+                </h1>
+                <p>
+                    The lifestyle destination bringing hot chef-crafted meals, designer apparel, instant 1-click checkout, and an interactive <strong>AI Assistant</strong> to your fingertips.
+                </p>
+                <div class="hero-cta">
+                    <button class="cta-btn cta-food" id="ctaFoodBtn">
+                        <i class="fas fa-hamburger"></i> Order Food
+                    </button>
+                    <button class="cta-btn cta-dress" id="ctaDressBtn">
+                        <i class="fas fa-shopping-bag"></i> Shop Fashion
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-cards-stack">
+                    <div class="hero-card-preview" style="background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=70');">
+                        <span class="hero-card-tag"><i class="fas fa-fire"></i> Fresh Pizzas</span>
+                    </div>
+                    <div class="hero-card-preview" style="background-image: url('https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=400&q=70'); transform: rotate(4deg);">
+                        <span class="hero-card-tag"><i class="fas fa-gem"></i> Silk Dresses</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN PRODUCT CATALOG WRAPPER -->
+    <main class="main-wrapper">
+        <!-- FILTER BAR -->
+        <div class="filter-bar">
+            <!-- Category Pills -->
+            <div class="category-pills" id="categoryPills">
+                <!-- Populated dynamically via JS -->
+            </div>
+
+            <!-- Sort Selector -->
+            <div class="sort-dropdown">
+                <select id="sortSelect">
+                    <option value="featured">Sort by: Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="rating">Highest Rated</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- PRODUCTS SECTION HEADER -->
+        <div class="products-section-header">
+            <h2 id="sectionTitle">🔥 Featured Products &amp; Popular Picks</h2>
+        </div>
+
+        <!-- PRODUCTS GRID -->
+        <div class="product-grid" id="productGrid">
+            <!-- Populated dynamically via JS -->
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo-brand" style="margin-bottom: 1rem;">
+                    <span class="taste"><i class="fas fa-utensils"></i> TASTE</span>
+                    <span class="amp">&amp;</span>
+                    <span class="trend" style="color:#c084fc;">TREND</span>
+                </div>
+                <p>Taste &amp; Trend is your premier multi-department online boutique for gourmet culinary creations and designer apparel. Featuring 1-click Buy Now checkout, Order Tracking, and an AI Assistant.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Food Categories</h4>
+                <ul>
+                    <li><a href="#">Gourmet Pizza &amp; Pasta</a></li>
+                    <li><a href="#">Juicy Burgers &amp; Wings</a></li>
+                    <li><a href="#">Organic Salad Bowls</a></li>
+                    <li><a href="#">Artisanal Beverages</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Fashion Collections</h4>
+                <ul>
+                    <li><a href="#">Silk Evening Gowns</a></li>
+                    <li><a href="#">Casual Linen Wear</a></li>
+                    <li><a href="#">Designer Ethnic Attire</a></li>
+                    <li><a href="#">Denim &amp; Jackets</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Customer Care</h4>
+                <ul>
+                    <li><a href="#">Order Tracking</a></li>
+                    <li><a href="#">Shipping &amp; Delivery</a></li>
+                    <li><a href="#">Return Policy</a></li>
+                    <li><a href="#">Help &amp; Support</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Taste &amp; Trend E-Commerce Inc. All rights reserved. Powered by HTML, CSS, JS, Python Flask &amp; AI Assistant.
+        </div>
+    </footer>
+
+    <!-- OVERLAYS & MODALS -->
+
+    <!-- Modal Background Backdrop -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <!-- Quick View Modal Container -->
+    <div class="modal-container" id="quickViewModal"></div>
+
+    <!-- CART DRAWER -->
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> Your Shopping Cart</h3>
+            <button class="modal-close-btn" id="cartDrawerClose"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-body" id="cartBody">
+            <!-- Items rendered via JS -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-summary-row">
+                <span>Subtotal:</span>
+                <span id="cartSubtotal">$0.00</span>
+            </div>
+            <div class="cart-summary-row">
+                <span>Estimated Tax (8%):</span>
+                <span id="cartTax">$0.00</span>
+            </div>
+            <div class="cart-summary-row">
+                <span>Shipping:</span>
+                <span id="cartShipping">$0.00</span>
+            </div>
+            <div class="cart-summary-row total">
+                <span>Grand Total:</span>
+                <span id="cartGrandTotal">$0.00</span>
+            </div>
+            <button class="btn-checkout" id="cartCheckoutBtn" disabled>
+                Proceed to Checkout <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- CHECKOUT FORM MODAL -->
+    <div class="modal-container checkout-modal" id="checkoutModal">
+        <button class="modal-close-btn" id="checkoutModalClose"><i class="fas fa-times"></i></button>
+        <h2 style="font-size: 1.5rem; font-weight:800; margin-bottom: 0.5rem;"><i class="fas fa-truck"></i> Complete Your Order</h2>
+        <p style="color: var(--text-muted); font-size:0.85rem;">Provide your delivery address and contact info to finalize your purchase.</p>
+
+        <div id="checkoutOrderSummary"></div>
+
+        <form class="checkout-form" id="checkoutForm">
+            <div class="form-group full">
+                <label for="custName">Full Name *</label>
+                <input type="text" id="custName" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label for="custEmail">Email Address *</label>
+                <input type="email" id="custEmail" placeholder="john@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="custPhone">Phone Number *</label>
+                <input type="tel" id="custPhone" placeholder="+1 (555) 000-1234" required>
+            </div>
+            <div class="form-group full">
+                <label for="custAddress">Shipping Address *</label>
+                <textarea id="custAddress" rows="2" placeholder="123 Main Street, Apt 4B, City, Country" required></textarea>
+            </div>
+            <div class="form-group full">
+                <label for="custPayment">Payment Method</label>
+                <select id="custPayment">
+                    <option value="Credit/Debit Card">💳 Credit / Debit Card (Mock)</option>
+                    <option value="Cash on Delivery">💵 Cash on Delivery</option>
+                    <option value="Apple Pay / Google Pay">📱 Mobile Wallet / Pay</option>
+                </select>
+            </div>
+            <div class="form-group full" style="margin-top: 1rem;">
+                <button type="submit" class="btn-checkout" id="submitOrderBtn">
+                    Place Order &amp; Pay Now
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- ORDER TRACKER SEARCH MODAL -->
+    <div class="modal-container checkout-modal" id="orderTrackerModal">
+        <button class="modal-close-btn" id="orderTrackerModalClose"><i class="fas fa-times"></i></button>
+        <h2 style="font-size: 1.5rem; font-weight:800; margin-bottom: 0.5rem;"><i class="fas fa-search-location"></i> Track Your Order</h2>
+        <p style="color: var(--text-muted); font-size:0.85rem;">Enter your Order Number (e.g., ORD-2026...) or Email address to view order details and tracking status.</p>
+
+        <form id="orderTrackerForm" style="display:flex; gap:8px; margin-top:1rem;">
+            <input type="text" id="orderSearchInput" placeholder="Enter Order Number or Email..." required style="flex:1; padding:10px 14px; border-radius:8px; border:1.5px solid var(--border-color); outline:none;">
+            <button type="submit" class="btn-checkout" style="width:auto; margin-top:0; padding:10px 20px;">Search</button>
+        </form>
+
+        <div id="orderSearchResults"></div>
+    </div>
+
+    <!-- TOAST NOTIFICATIONS CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- JavaScript Module Files -->
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ai-assistant.js') }}"></script>
+</body>
+</html>

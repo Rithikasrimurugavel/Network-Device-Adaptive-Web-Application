@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taste & Trend | Adaptive E-Commerce</title>
+    
+    <!-- 1. Execute capability detection script as early as possible -->
+    <script src="{{ url_for('static', filename='js/detect.js') }}"></script>
+    
+    <!-- 2. Critical Layout CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- 3. Dynamic Speculative Prefetching (High-Tier Only) -->
+    {% if g.adaptive.enable_prefetch %}
+        <link rel="dns-prefetch" href="//cdn.example.com">
+    {% endif %}
+</head>
+<body class="profile-{{ g.adaptive.profile }}">
+    <header class="navbar">
+        <div class="logo"><a href="/">Taste & Trend</a></div>
+        <div class="cart-status">Cart (<span id="cart-count">0</span>)</div>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- 4. Core Essential JS -->
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+    <!-- 5. Dynamic Adaptive JS Injection -->
+    {% if g.adaptive.load_enhanced_js %}
+        <script src="{{ url_for('static', filename='js/enhanced.js') }}" defer></script>
+    {% endif %}
+</body>
+</html>
